@@ -356,7 +356,7 @@
   <h1>Split audio into <span>stems</span>.</h1>
   <p>Free, self-contained Windows app that separates any song into vocals, drums, bass and more — powered by Demucs AI. No Python required.</p>
   <div class="btn-group">
-    <a class="btn-primary" href="https://github.com/Dark0rion/tone-splitter-landing-page/releases/latest/download/ToneSplitter.exe">
+    <a class="btn-primary" data-download-btn href="https://github.com/Dark0rion/tone-splitter-landing-page/releases/latest/download/ToneSplitter-v1.0.0.exe">
       <svg class="icon-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
       </svg>
@@ -368,7 +368,7 @@
     <span>·</span>
     Windows 10 / 11
     <span>·</span>
-    v1.0.0
+    <span data-version-label>v1.0.0</span>
   </p>
   <p class="smartscreen-note">
     Windows may show a SmartScreen warning — click <strong>More info</strong> → <strong>Run anyway</strong>.<br/>
@@ -483,11 +483,11 @@
 <section class="cta">
   <h2>Ready to split your first track?</h2>
   <p>One file. No setup. Works on any Windows 10/11 machine.</p>
-  <a class="btn-primary" href="https://github.com/Dark0rion/tone-splitter-landing-page/releases/latest/download/ToneSplitter.exe">
+  <a class="btn-primary" data-download-btn href="https://github.com/Dark0rion/tone-splitter-landing-page/releases/latest/download/ToneSplitter-v1.0.0.exe">
     <svg class="icon-dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
     </svg>
-    Download ToneSplitter v1.0.0
+    Download ToneSplitter <span data-version-label>v1.0.0</span>
   </a>
 </section>
 
@@ -496,6 +496,21 @@
   <p>ToneSplitter uses <a href="https://github.com/adefossez/demucs" target="_blank" rel="noopener">Demucs</a> by Alexandre Défossez — MIT License.</p>
   <p style="margin-top:0.4rem;">ToneSplitter is free software. &copy; 2026</p>
 </footer>
+
+<script>
+  fetch('version.json')
+    .then(r => r.json())
+    .then(({ version }) => {
+      const base = 'https://github.com/Dark0rion/tone-splitter-landing-page/releases/latest/download/';
+      document.querySelectorAll('[data-version-label]').forEach(el => {
+        el.textContent = 'v' + version;
+      });
+      document.querySelectorAll('[data-download-btn]').forEach(el => {
+        el.href = base + 'ToneSplitter-v' + version + '.exe';
+      });
+    })
+    .catch(() => { /* keep hardcoded fallback */ });
+</script>
 
 </body>
 </html>
